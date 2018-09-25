@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
-import { NavController } from 'ionic-angular';
+import {Component, ViewChild, ElementRef} from '@angular/core';
+import {IonicPage} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 
 declare var google;
 
@@ -24,13 +24,13 @@ export class HomePage {
 
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
     this.initMap();
   }
 
   initMap() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 8,
+      zoom: 5,
       center: this.location,
       styles: [
         {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -40,8 +40,18 @@ export class HomePage {
           featureType: 'administrative.locality',
           elementType: 'labels.text.fill',
           stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'geometry',
+          stylers: [{color: '#3f110b'}]
         }
-        ]
+      ]
     });
 
     // Marker
