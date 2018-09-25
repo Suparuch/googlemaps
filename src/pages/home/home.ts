@@ -13,10 +13,12 @@ export class HomePage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  location = {lat: 13.90, lng: 100.53};
   start = 'chicago, il';
   end = 'chicago, il';
   directionsService = new google.maps.DirectionsService;
   directionsDisplay = new google.maps.DirectionsRenderer;
+  marker = new google.maps.Marker;
 
   constructor(public navCtrl: NavController) {
 
@@ -28,9 +30,12 @@ export class HomePage {
 
   initMap() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 7,
-      center: {lat: 41.85, lng: -87.65}
+      zoom: 8,
+      center: this.location
     });
+
+    // Marker
+    //this.marker = new google.maps.Marker({position: this.location, map: this.map});
 
     this.directionsDisplay.setMap(this.map);
   }
