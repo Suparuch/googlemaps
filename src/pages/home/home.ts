@@ -31,11 +31,13 @@ export class HomePage {
   initMap() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 8,
-      center: this.location
+      center: this.location,
+      styles: [
+        {elementType: 'geometry', stylers: [{color: '#f3f3f3'}]}]
     });
 
     // Marker
-    //this.marker = new google.maps.Marker({position: this.location, map: this.map});
+    this.marker = new google.maps.Marker({position: this.location, map: this.map});
 
     this.directionsDisplay.setMap(this.map);
   }
