@@ -33,7 +33,10 @@ export class HomePage {
       zoom: 8,
       center: this.location,
       styles: [
-        {elementType: 'geometry', stylers: [{color: '#f3f3f3'}]}]
+        {elementType: 'geometry', stylers: [{color: '#f3f3f3'}]},
+        {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+        {elementType: 'labels.text.fill', stylers: [{color: '#ffffff'}]},
+        ]
     });
 
     // Marker
