@@ -33,9 +33,14 @@ export class HomePage {
       zoom: 8,
       center: this.location,
       styles: [
-        {elementType: 'geometry', stylers: [{color: '#f3f3f3'}]},
+        {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
         {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-        {elementType: 'labels.text.fill', stylers: [{color: '#ffffff'}]},
+        {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#d59563'}]
+        }
         ]
     });
 
