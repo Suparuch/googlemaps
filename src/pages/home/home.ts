@@ -1,6 +1,7 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
-import {IonicPage} from 'ionic-angular';
-import {NavController} from 'ionic-angular';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { IonicPage } from 'ionic-angular';
+import { Http } from '@angular/http';
+import { Subscription } from 'rxjs';
 
 declare var google;
 
@@ -9,7 +10,7 @@ declare var google;
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
@@ -20,8 +21,45 @@ export class HomePage {
   directionsDisplay = new google.maps.DirectionsRenderer;
   marker = new google.maps.Marker;
 
-  constructor(public navCtrl: NavController) {
+  private endPoint = 'http://opendata.oae.go.th:8080/farmer/api/v1/';
+  private loginPath = 'authentication';
 
+  loginSubscription: Subscription;
+
+  constructor(
+    private http: Http
+  ) {}
+
+  ngOnInit() {
+    this.login();
+  }
+
+  private login() {
+    const endPoint = this.endPoint + this.loginPath;
+
+    // option 1
+    /*
+    const login = {
+      id: 'train01',
+      password: 'oaetrain123'
+    };
+    const body = JSON.stringify(login);
+    */
+
+    // option 2
+    const params = new URLSearchParams();
+    params.append('id', 'train01');
+    params.append('password', 'oaetrain123');
+
+    // นำ params.toString() หรือ body ไปแทนค่าหลัง ',' ด้วย
+
+    // ถ้าทั้ง 2 option ไม่สามารถ login ได้ น่าจะเป็นที่ตัวแปรที่ส่งไปไม่ครบ
+
+    this.loginSubscription = this.http.post(endPoint, params.toString())
+      .subscribe((res) => {
+        console.log('res : ', res);
+        this.loginSubscription.unsubscribe();
+      });
   }
 
   ionViewDidLoad() {
